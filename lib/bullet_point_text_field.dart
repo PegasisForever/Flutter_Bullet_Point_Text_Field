@@ -1,6 +1,16 @@
 import 'package:flutter/material.dart';
 
 class BulletPointTextField extends StatefulWidget {
+  final List<String> initialValue;
+  final ValueChanged<List<String>>? onChanged;
+
+  const BulletPointTextField({
+    Key? key,
+    this.initialValue = const [''],
+    this.onChanged,
+  })  : assert(initialValue.length > 0),
+        super(key: key);
+
   @override
   _BulletPointTextFieldState createState() => _BulletPointTextFieldState();
 }
@@ -12,7 +22,9 @@ class _BulletPointTextFieldState extends State<BulletPointTextField> {
   @override
   void initState() {
     super.initState();
-    _insert(index: 0);
+    for (var i = 0; i < widget.initialValue.length; i++) {
+      _insert(index: i, text: widget.initialValue[i]);
+    }
   }
 
   @override
@@ -68,6 +80,11 @@ class _BulletPointTextFieldState extends State<BulletPointTextField> {
           _nodes[index + points.length - 1].requestFocus();
         }
         setState(() {});
+      }
+
+      if (widget.onChanged != null) {
+        widget.onChanged!(
+            _controllers.map((controller) => controller.text).toList());
       }
     });
     _controllers.insert(index, controller);

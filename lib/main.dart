@@ -10,7 +10,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Medium-like Text Editor',
+      title: 'Bullet Point Text Field',
       theme: ThemeData(
         brightness: Brightness.dark,
         scaffoldBackgroundColor: Colors.black,
@@ -26,7 +26,10 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BulletPointTextField(),
+      body: BulletPointTextField(
+        initialValue: ['Point 1', 'Point 2'],
+        onChanged: print,
+      ),
     );
   }
 }
