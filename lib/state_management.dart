@@ -16,7 +16,7 @@ class EditorProvider extends ChangeNotifier {
 
   TextEditingController textAt(int index) => _text.elementAt(index);
 
-  void insert({required int index, String text=''}) {
+  void insert({required int index, String text = ''}) {
     final TextEditingController controller =
         TextEditingController(text: '\u200B' + text);
     controller.addListener(() {
@@ -35,18 +35,31 @@ class EditorProvider extends ChangeNotifier {
           controller.selection =
               TextSelection.fromPosition(TextPosition(offset: 1));
         }
-      }
-      if (controller.text.contains('\n')) {
+      } else if (controller.text.contains('\n')) {
         final int index = _text.indexOf(controller);
-        List<String> _split = controller.text.split('\n');
-        controller.text = _split.first;
-        insert(
-          index: index + 1,
-          text: _split.last,
-        );
-        textAt(index + 1).selection =
-            TextSelection.fromPosition(TextPosition(offset: 1));
-        nodeAt(index + 1).requestFocus();
+        List<String> points = controller.text.split('\n');
+        controller.text = points.first;
+        if (points.length == 2) {
+          insert(
+            index: index + 1,
+            text: points.last,
+          );
+          textAt(index + 1).selection =
+              TextSelection.fromPosition(TextPosition(offset: 1));
+          nodeAt(index + 1).requestFocus();
+        } else {
+          for (var i = 1; i < points.length; i++) {
+            insert(
+              index: index + i,
+              text: points[i],
+            );
+          }
+          final lastController = textAt(index + points.length - 1);
+          lastController.selection = TextSelection.fromPosition(
+            TextPosition(offset: lastController.text.length),
+          );
+          nodeAt(index + points.length - 1).requestFocus();
+        }
         notifyListeners();
       }
     });
