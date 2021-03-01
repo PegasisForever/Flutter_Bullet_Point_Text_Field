@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'text_editor.dart';
+
+import 'bullet_point_text_editor.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(App());
 }
 
-class MyApp extends StatelessWidget {
+class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -16,7 +17,16 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.teal,
       ),
       debugShowCheckedModeBanner: false,
-      home: TextEditor(),
+      home: HomePage(),
+    );
+  }
+}
+
+class HomePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: BulletPointTextEditor(),
     );
   }
 }

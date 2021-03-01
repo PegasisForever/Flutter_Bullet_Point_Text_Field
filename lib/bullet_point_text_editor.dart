@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'text_field.dart';
 
-class TextEditor extends StatefulWidget {
+class BulletPointTextEditor extends StatefulWidget {
   @override
-  _TextEditorState createState() => _TextEditorState();
+  _BulletPointTextEditorState createState() => _BulletPointTextEditorState();
 }
 
-class _TextEditorState extends State<TextEditor> {
+class _BulletPointTextEditorState extends State<BulletPointTextEditor> {
   List<FocusNode> _nodes = [];
   List<TextEditingController> _controllers = [];
 
@@ -14,6 +13,13 @@ class _TextEditorState extends State<TextEditor> {
   void initState() {
     super.initState();
     _insert(index: 0);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _controllers.forEach((controller) => controller.dispose());
+    _nodes.forEach((node) => node.dispose());
   }
 
   void _insert({required int index, String text = ''}) {
@@ -70,18 +76,29 @@ class _TextEditorState extends State<TextEditor> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: ListView.builder(
-        itemCount: _controllers.length,
-        itemBuilder: (context, index) {
-          return Focus(
-            child: BulletPointTextField(
-              controller: _controllers[index],
-              focusNode: _nodes[index],
+    return ListView.builder(
+      itemCount: _controllers.length,
+      itemBuilder: (context, index) {
+        return Focus(
+          child: TextField(
+            controller: _controllers[index],
+            focusNode: _nodes[index],
+            autofocus: true,
+            keyboardType: TextInputType.multiline,
+            maxLines: null,
+            cursorColor: Colors.teal,
+            textAlign: TextAlign.start,
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              prefixText: '\u2022 ',
+              prefixStyle: TextStyle(fontSize: 16.0),
+              isDense: true,
+              contentPadding: EdgeInsets.fromLTRB(24, 8, 16, 8),
             ),
-          );
-        },
-      ),
+            style: TextStyle(fontSize: 16.0),
+          ),
+        );
+      },
     );
   }
 }
