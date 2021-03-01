@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 
 class BulletPointTextField extends StatelessWidget {
-  const BulletPointTextField({Key key, this.controller, this.focusNode})
-      : super(key: key);
+  const BulletPointTextField({
+    required this.controller,
+    required this.focusNode,
+    Key? key,
+  }) : super(key: key);
 
   final TextEditingController controller;
   final FocusNode focusNode;

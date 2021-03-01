@@ -16,9 +16,9 @@ class EditorProvider extends ChangeNotifier {
 
   TextEditingController textAt(int index) => _text.elementAt(index);
 
-  void insert({int index, String text}) {
+  void insert({required int index, String text=''}) {
     final TextEditingController controller =
-        TextEditingController(text: '\u200B' + (text ?? ''));
+        TextEditingController(text: '\u200B' + text);
     controller.addListener(() {
       if (!controller.text.startsWith('\u200B')) {
         final int index = _text.indexOf(controller);
