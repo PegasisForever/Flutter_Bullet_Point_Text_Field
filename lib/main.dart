@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import 'state_management.dart';
 import 'text_editor.dart';
 
 void main() {
@@ -15,10 +17,14 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.dark,
         scaffoldBackgroundColor: Colors.black,
         primarySwatch: Colors.teal,
-        fontFamily: 'Georgia',
       ),
       debugShowCheckedModeBanner: false,
-      home: TextEditor(),
+      home: ChangeNotifierProvider<EditorProvider>(
+        create: (context) => EditorProvider(),
+        builder: (context, child) {
+          return TextEditor();
+        },
+      ),
     );
   }
 }
