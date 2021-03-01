@@ -30,6 +30,10 @@ class EditorProvider extends ChangeNotifier {
           _text.removeAt(index);
           _nodes.removeAt(index);
           notifyListeners();
+        } else {
+          controller.text = '\u200B';
+          controller.selection =
+              TextSelection.fromPosition(TextPosition(offset: 1));
         }
       }
       if (controller.text.contains('\n')) {
