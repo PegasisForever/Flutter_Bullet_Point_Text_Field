@@ -15,10 +15,10 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.dark,
         scaffoldBackgroundColor: Colors.black,
         primarySwatch: Colors.teal,
-        fontFamily: 'Georgia',  
+        fontFamily: 'Georgia',
       ),
       debugShowCheckedModeBanner: false,
-      home: TextEditor()
+      home: TextEditor(),
     );
   }
 }
