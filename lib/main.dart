@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'bullet_point_text_editor.dart';
+import 'bullet_point_text_field.dart';
 
 void main() {
   runApp(App());
@@ -26,7 +26,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BulletPointTextEditor(),
+      body: BulletPointTextField(),
     );
   }
 }

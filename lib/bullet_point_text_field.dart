@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class BulletPointTextEditor extends StatefulWidget {
+class BulletPointTextField extends StatefulWidget {
   @override
-  _BulletPointTextEditorState createState() => _BulletPointTextEditorState();
+  _BulletPointTextFieldState createState() => _BulletPointTextFieldState();
 }
 
-class _BulletPointTextEditorState extends State<BulletPointTextEditor> {
+class _BulletPointTextFieldState extends State<BulletPointTextField> {
   List<FocusNode> _nodes = [];
   List<TextEditingController> _controllers = [];
 
